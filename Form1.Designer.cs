@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_color = new System.Windows.Forms.Button();
+            this.pic_color = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
-            this.pic_color = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_fill = new System.Windows.Forms.Button();
+            this.btn_pencil = new System.Windows.Forms.Button();
+            this.btn_eraser = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
@@ -40,7 +43,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btn_eraser);
+            this.panel1.Controls.Add(this.btn_pencil);
+            this.panel1.Controls.Add(this.btn_fill);
+            this.panel1.Controls.Add(this.btn_color);
             this.panel1.Controls.Add(this.pic_color);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -48,6 +54,32 @@
             this.panel1.Size = new System.Drawing.Size(784, 100);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btn_color
+            // 
+            this.btn_color.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
+            this.btn_color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_color.ForeColor = System.Drawing.Color.White;
+            this.btn_color.Image = global::WinFormsPaint.Properties.Resources.color;
+            this.btn_color.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_color.Location = new System.Drawing.Point(256, 20);
+            this.btn_color.Name = "btn_color";
+            this.btn_color.Size = new System.Drawing.Size(71, 74);
+            this.btn_color.TabIndex = 1;
+            this.btn_color.Text = "Color";
+            this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_color.UseVisualStyleBackColor = true;
+            this.btn_color.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // pic_color
+            // 
+            this.pic_color.BackColor = System.Drawing.Color.White;
+            this.pic_color.Location = new System.Drawing.Point(196, 34);
+            this.pic_color.Name = "pic_color";
+            this.pic_color.Size = new System.Drawing.Size(54, 47);
+            this.pic_color.TabIndex = 0;
+            this.pic_color.UseVisualStyleBackColor = false;
+            this.pic_color.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -68,31 +100,50 @@
             this.pic.TabIndex = 2;
             this.pic.TabStop = false;
             // 
-            // pic_color
+            // btn_fill
             // 
-            this.pic_color.BackColor = System.Drawing.Color.White;
-            this.pic_color.Location = new System.Drawing.Point(196, 34);
-            this.pic_color.Name = "pic_color";
-            this.pic_color.Size = new System.Drawing.Size(54, 47);
-            this.pic_color.TabIndex = 0;
-            this.pic_color.UseVisualStyleBackColor = false;
-            this.pic_color.Click += new System.EventHandler(this.button1_Click);
+            this.btn_fill.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
+            this.btn_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_fill.ForeColor = System.Drawing.Color.White;
+            this.btn_fill.Image = global::WinFormsPaint.Properties.Resources.bucket;
+            this.btn_fill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_fill.Location = new System.Drawing.Point(333, 20);
+            this.btn_fill.Name = "btn_fill";
+            this.btn_fill.Size = new System.Drawing.Size(71, 74);
+            this.btn_fill.TabIndex = 2;
+            this.btn_fill.Text = "Fill";
+            this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_fill.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_pencil
             // 
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::WinFormsPaint.Properties.Resources.color;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(256, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 74);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Color";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btn_pencil.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
+            this.btn_pencil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_pencil.ForeColor = System.Drawing.Color.White;
+            this.btn_pencil.Image = global::WinFormsPaint.Properties.Resources.pencil;
+            this.btn_pencil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_pencil.Location = new System.Drawing.Point(410, 20);
+            this.btn_pencil.Name = "btn_pencil";
+            this.btn_pencil.Size = new System.Drawing.Size(71, 74);
+            this.btn_pencil.TabIndex = 3;
+            this.btn_pencil.Text = "Pencil";
+            this.btn_pencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_pencil.UseVisualStyleBackColor = true;
+            // 
+            // btn_eraser
+            // 
+            this.btn_eraser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
+            this.btn_eraser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_eraser.ForeColor = System.Drawing.Color.White;
+            this.btn_eraser.Image = global::WinFormsPaint.Properties.Resources.eraser;
+            this.btn_eraser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_eraser.Location = new System.Drawing.Point(487, 20);
+            this.btn_eraser.Name = "btn_eraser";
+            this.btn_eraser.Size = new System.Drawing.Size(71, 74);
+            this.btn_eraser.TabIndex = 4;
+            this.btn_eraser.Text = "Eraser";
+            this.btn_eraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_eraser.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -119,6 +170,9 @@
         private Panel panel2;
         private Button pic_color;
         private PictureBox pic;
-        private Button button1;
+        private Button btn_color;
+        private Button btn_eraser;
+        private Button btn_pencil;
+        private Button btn_fill;
     }
 }
