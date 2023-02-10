@@ -1,4 +1,5 @@
 using System.Net;
+using System.Numerics;
 using System.Security.Cryptography.Xml;
 
 namespace WinFormsPaint
@@ -38,15 +39,19 @@ namespace WinFormsPaint
         float startAngle;
         float startAlfaAngle;
         float alfaAngle;
+        float startBetaAngle;
+        float betaAngle;
 
         double alfaInRadiants;
-        double test;
+        double betaInRadiants;
+        
 
         Point startPoint;
         Point endPoint;
         Rectangle myRectangle;
         Rectangle rectangleForRectangleAngle;
-        private Rectangle rectangleForAlfaAngle;
+        Rectangle rectangleForAlfaAngle;
+        Rectangle rectangleForBetaAngle;
 
         Point halfWayPoint = new Point();
 
@@ -69,14 +74,18 @@ namespace WinFormsPaint
         Tool tool;
 
 
-        public static int VectorLength(Point a, Point b)
+        public static int VectorMagnitude(Point a, Point b)
         {
             double result;
-
-            result = Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+            
+            //result = Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+            result = Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
 
             return Convert.ToInt32(result);
         }
+
+
+
         //distanceOne = ((endPoint.X - selPoint.X) / 2).ToString();
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
@@ -106,13 +115,10 @@ namespace WinFormsPaint
             
         }
 
-       
         private void pic_Click(object sender, EventArgs e)
         {
 
         }
-
-        
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
@@ -139,18 +145,6 @@ namespace WinFormsPaint
                     textBox_height.Text = (maxY - minY).ToString();
 
 
-                    if ((maxY - minY) > 0 && (maxY - minY) > 0)
-                    {
-                        alfaInRadiants = Math.Atan(Convert.ToDouble(maxY - minY) / Convert.ToDouble(maxX - minX));
-                        alfaAngle = Convert.ToSingle(alfaInRadiants * 180 / Math.PI);
-
-                        //Debug and temporary usage
-                        textBox_debug_1.Text = "alfa in rad: " + alfaInRadiants.ToString();
-                        textBox_debug_2.Text = "alfa in degrees: " + alfaAngle.ToString();
-                    }
-
-
-
                     switch (tool)
                     {
                         case Tool.Pencil:
@@ -168,31 +162,63 @@ namespace WinFormsPaint
                             //halfWayPoint.X = ((endPoint.X - selPoint.X) / 2) + selPoint.X - 40;
                             //halfWayPoint.Y = ((endPoint.Y - selPoint.Y) / 2) + selPoint.Y - 20;
 
+                            if ((maxY - minY) > 0 && (maxY - minY) > 0)
+                            {
+                                alfaInRadiants = Math.Atan(Convert.ToDouble(maxY - minY) / Convert.ToDouble(maxX - minX));
+                                alfaAngle = Convert.ToSingle(alfaInRadiants * 180 / Math.PI);
+
+
+
+                                //
+                                //
+                                //
+                                //
+                                //
+                                //
+                                //beta angle
+                                betaInRadiants = Math.Atan(Convert.ToDouble(maxX - minX) / Convert.ToDouble(maxY - minY));
+                                betaAngle = Convert.ToSingle(betaInRadiants * 180 / Math.PI);
+
+                                //Debug and temporary usage
+                                textBox_debug_1.Text = "alfa in rad: " + alfaInRadiants.ToString();
+                                textBox_debug_2.Text = "alfa in degrees: " + alfaAngle.ToString();
+
+                                textBox_debug_3.Text = "beta in degrees: " + betaAngle.ToString();
+                            }
+
+
+
                             halfWayPoint.X = ((endPoint.X - startPoint.X) / 2) + startPoint.X;
                             halfWayPoint.Y = ((endPoint.Y - startPoint.Y) / 2) + startPoint.Y;
 
                             //rectangleForAlfaAngle = new Rectangle(endPoint.X - ((endPoint.X - startPoint.X) / 2), minY + ((endPoint.Y - startPoint.Y) / 2), w, h);
                             rectangleForAlfaAngle = new Rectangle(endPoint.X - (absWidth / 2), minY + (nonAbsHeight / 2), absWidth, absHeight);
 
+                            rectangleForBetaAngle = new Rectangle(minX - (nonAbsWidth /2), minY - (nonAbsHeight/2), absWidth, absHeight);
+
                             if (startPoint.X <= endPoint.X && startPoint.Y <= endPoint.Y)
                             {
                                 startAngle = 270f;
                                 startAlfaAngle = 180f;
+                                startBetaAngle = 90f - betaAngle;
                             }
                             else if(startPoint.X > endPoint.X && startPoint.Y <= endPoint.Y )
                             {
                                 startAngle = 180f;
                                 startAlfaAngle = 360f - alfaAngle;
+                                startBetaAngle = 90f;
                             }
                             else if (startPoint.X > endPoint.X && startPoint.Y > endPoint.Y)
                             {
                                 startAngle = 90f;
                                 startAlfaAngle = 0f;
+                                startBetaAngle = 270f - betaAngle;
                             }
                             else
                             {
                                 startAngle = 0f;
                                 startAlfaAngle = 180f - alfaAngle;
+                                startBetaAngle = 270f;
                             }
                             
 
@@ -203,7 +229,7 @@ namespace WinFormsPaint
                             adjustedYforRectangleAngle = adjustedHeight / 4;
 
                             //just example and not calculating real distance
-                            distanceOne = VectorLength(startPoint, endPoint).ToString();
+                            distanceOne = VectorMagnitude(startPoint, endPoint).ToString();
 
 
 
@@ -277,6 +303,9 @@ namespace WinFormsPaint
                     g.DrawArc(p, rectangleForRectangleAngle, startAngle, 90.0f);
 
                     g.DrawArc(p, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
+
+                    g.DrawArc(p, rectangleForBetaAngle, startBetaAngle, betaAngle);
+
                     break;
             }
             //if (tool == Tool.Ellipse)
@@ -325,6 +354,9 @@ namespace WinFormsPaint
 
                         //e.Graphics.DrawRectangle(p, rectangleForAlfaAngle);
                         e.Graphics.DrawArc(p, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
+
+                        //e.Graphics.DrawRectangle(p, rectangleForBetaAngle);
+                        e.Graphics.DrawArc(p, rectangleForBetaAngle, startBetaAngle, betaAngle);
                         //thirdLine to implement //trigonometie?//
                     }
                     break;
