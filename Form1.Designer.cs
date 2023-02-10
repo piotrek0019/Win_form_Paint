@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_debug_4 = new System.Windows.Forms.TextBox();
             this.textBox_debug_3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.textBox_debug_2 = new System.Windows.Forms.TextBox();
             this.textBox_debug_1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,10 +68,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textBox_debug_4);
             this.panel1.Controls.Add(this.textBox_debug_3);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.textBox_debug_2);
             this.panel1.Controls.Add(this.textBox_debug_1);
             this.panel1.Controls.Add(this.label5);
@@ -99,12 +99,12 @@
             this.panel1.Size = new System.Drawing.Size(1553, 150);
             this.panel1.TabIndex = 0;
             // 
-            // textBox1
+            // textBox_debug_4
             // 
-            this.textBox1.Location = new System.Drawing.Point(1329, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 25;
+            this.textBox_debug_4.Location = new System.Drawing.Point(1329, 113);
+            this.textBox_debug_4.Name = "textBox_debug_4";
+            this.textBox_debug_4.Size = new System.Drawing.Size(187, 23);
+            this.textBox_debug_4.TabIndex = 25;
             // 
             // textBox_debug_3
             // 
@@ -118,18 +118,18 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1274, 112);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(16, 15);
+            this.label3.Size = new System.Drawing.Size(53, 15);
             this.label3.TabIndex = 23;
-            this.label3.Text = "H";
+            this.label3.Text = "Debug_4";
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1274, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 15);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "W";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1274, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 15);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Debug_3";
             // 
             // textBox_debug_2
             // 
@@ -313,6 +313,7 @@
             this.btn_fill.Text = "Fill";
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = true;
+            this.btn_fill.Enabled = false;
             // 
             // btn_color
             // 
@@ -328,6 +329,7 @@
             this.btn_color.Text = "Color";
             this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_color.UseVisualStyleBackColor = true;
+            this.btn_color.Enabled = false;
             // 
             // pic_color
             // 
@@ -465,10 +467,10 @@
         private TextBox textBox_width;
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox textBox_debug_4;
         private TextBox textBox_debug_3;
         private Label label3;
-        private Label label4;
+        private Label label6;
         private TextBox textBox_debug_2;
         private TextBox textBox_debug_1;
         private Label label5;
