@@ -15,18 +15,18 @@ namespace WinFormsPaint
 
             this.DoubleBuffered = true;
 
-            bm = new Bitmap(pic.Width, pic.Height);
-            g = Graphics.FromImage(bm);
-            g.Clear(Color.White);
-            pic.Image = bm;
+            bitmap = new Bitmap(pic.Width, pic.Height);
+            graphics = Graphics.FromImage(bitmap);
+            graphics.Clear(Color.White);
+            pic.Image = bitmap;
 
         }
 
-        Bitmap bm;
-        Graphics g;
+        Bitmap bitmap;
+        Graphics graphics;
         bool paint = false;
         Point px, py;
-        Pen p = new Pen(Color.Black, 1);
+        Pen pen = new Pen(Color.Black, 1);
         Pen whitePen = new Pen(Color.White, 2);
         Pen erase = new Pen(Color.White, 10);
 
@@ -55,9 +55,12 @@ namespace WinFormsPaint
 
         Point halfWayPoint = new Point();
 
+        //test 
+        TriangleFactory triangleObject = new TriangleFactory();
 
 
-        enum Tool
+
+        enum ToolTypeEnum
         {
             Color,
             Fill,
@@ -71,18 +74,18 @@ namespace WinFormsPaint
         }
 
 
-        Tool tool;
+        ToolTypeEnum toolType;
 
 
-        public static int VectorMagnitude(Point a, Point b)
-        {
-            double result;
+        //public static int VectorMagnitude(Point a, Point b)
+        //{
+        //    double result;
             
-            //result = Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
-            result = Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
+        //    //result = Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+        //    result = Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
 
-            return Convert.ToInt32(result);
-        }
+        //    return Convert.ToInt32(result);
+        //}
 
 
 
@@ -102,12 +105,12 @@ namespace WinFormsPaint
 
            
 
-            switch (tool)
+            switch (toolType)
             {
-                case Tool.Rectangle:
-                case Tool.Ellipse:
-                case Tool.Line:
-                case Tool.Triangle:
+                case ToolTypeEnum.Rectangle:
+                case ToolTypeEnum.Ellipse:
+                case ToolTypeEnum.Line:
+                case ToolTypeEnum.Triangle:
                     startPoint = e.Location;
                     break;
                 
@@ -145,91 +148,99 @@ namespace WinFormsPaint
                     textBox_height.Text = (maxY - minY).ToString();
 
 
-                    switch (tool)
+                    switch (toolType)
                     {
-                        case Tool.Pencil:
+                        case ToolTypeEnum.Pencil:
                             px = e.Location;
-                            g.DrawLine(p, px, py);
+                            graphics.DrawLine(pen, px, py);
                             py = px;
                             break;
-                        case Tool.Eraser:
+                        case ToolTypeEnum.Eraser:
                             px = e.Location;
-                            g.DrawLine(erase, px, py);
+                            graphics.DrawLine(erase, px, py);
                             py = px;
                             break;
-                        case Tool.Line:
-                        case Tool.Triangle:
+                        case ToolTypeEnum.Line:
+                        case ToolTypeEnum.Triangle:
+                            triangleObject.SetStartEndPoints(startPoint, endPoint);
+                            triangleObject.CalculateCoordinates();
+                            triangleObject.Calculate();
+
                             //halfWayPoint.X = ((endPoint.X - selPoint.X) / 2) + selPoint.X - 40;
                             //halfWayPoint.Y = ((endPoint.Y - selPoint.Y) / 2) + selPoint.Y - 20;
 
-                            if ((maxY - minY) > 0 && (maxY - minY) > 0)
-                            {
-                                alfaInRadiants = Math.Atan(Convert.ToDouble(maxY - minY) / Convert.ToDouble(maxX - minX));
-                                alfaAngle = Convert.ToSingle(alfaInRadiants * 180 / Math.PI);
+                            //TODO PA probably gonna need object of Triangle with bunch of methods
+                            //I need provide:
+                            //maxY
+                            //minY
+
+                            //I need return:
+                            //??
+                            //if ((maxY - minY) > 0 && (maxX - minX) > 0)
+                            //{
+                            //    alfaInRadiants = Math.Atan(Convert.ToDouble(maxY - minY) / Convert.ToDouble(maxX - minX));
+                            //    alfaAngle = Convert.ToSingle(alfaInRadiants * 180 / Math.PI);
 
 
 
-                                //
-                                //
-                                //
-                                //
-                                //
-                                //
-                                //beta angle
-                                betaInRadiants = Math.Atan(Convert.ToDouble(maxX - minX) / Convert.ToDouble(maxY - minY));
-                                betaAngle = Convert.ToSingle(betaInRadiants * 180 / Math.PI);
-
-                                //Debug and temporary usage
-                                textBox_debug_1.Text = "alfa in rad: " + alfaInRadiants.ToString();
-                                textBox_debug_2.Text = "alfa in degrees: " + alfaAngle.ToString();
-
-                                textBox_debug_3.Text = "beta in degrees: " + betaAngle.ToString();
-                            }
 
 
 
-                            halfWayPoint.X = ((endPoint.X - startPoint.X) / 2) + startPoint.X;
-                            halfWayPoint.Y = ((endPoint.Y - startPoint.Y) / 2) + startPoint.Y;
+                            //    beta angle
+                            //    betaInRadiants = Math.Atan(Convert.ToDouble(maxX - minX) / Convert.ToDouble(maxY - minY));
+                            //    betaAngle = Convert.ToSingle(betaInRadiants * 180 / Math.PI);
+
+                            //    Debug and temporary usage
+                            //    textBox_debug_1.Text = "alfa in rad: " + alfaInRadiants.ToString();
+                            //    textBox_debug_2.Text = "alfa in degrees: " + alfaAngle.ToString();
+
+                            //    textBox_debug_3.Text = "beta in degrees: " + betaAngle.ToString();
+                            //}
+
+
+
+                            //halfWayPoint.X = ((endPoint.X - startPoint.X) / 2) + startPoint.X;
+                            //halfWayPoint.Y = ((endPoint.Y - startPoint.Y) / 2) + startPoint.Y;
 
                             //rectangleForAlfaAngle = new Rectangle(endPoint.X - ((endPoint.X - startPoint.X) / 2), minY + ((endPoint.Y - startPoint.Y) / 2), w, h);
-                            rectangleForAlfaAngle = new Rectangle(endPoint.X - (absWidth / 2), minY + (nonAbsHeight / 2), absWidth, absHeight);
+                            //rectangleForAlfaAngle = new Rectangle(endPoint.X - (absWidth / 2), minY + (nonAbsHeight / 2), absWidth, absHeight);
 
-                            rectangleForBetaAngle = new Rectangle(minX - (nonAbsWidth /2), minY - (nonAbsHeight/2), absWidth, absHeight);
+                            //rectangleForBetaAngle = new Rectangle(minX - (nonAbsWidth / 2), minY - (nonAbsHeight / 2), absWidth, absHeight);
 
-                            if (startPoint.X <= endPoint.X && startPoint.Y <= endPoint.Y)
-                            {
-                                startAngle = 270f;
-                                startAlfaAngle = 180f;
-                                startBetaAngle = 90f - betaAngle;
-                            }
-                            else if(startPoint.X > endPoint.X && startPoint.Y <= endPoint.Y )
-                            {
-                                startAngle = 180f;
-                                startAlfaAngle = 360f - alfaAngle;
-                                startBetaAngle = 90f;
-                            }
-                            else if (startPoint.X > endPoint.X && startPoint.Y > endPoint.Y)
-                            {
-                                startAngle = 90f;
-                                startAlfaAngle = 0f;
-                                startBetaAngle = 270f - betaAngle;
-                            }
-                            else
-                            {
-                                startAngle = 0f;
-                                startAlfaAngle = 180f - alfaAngle;
-                                startBetaAngle = 270f;
-                            }
-                            
+                            //if (startPoint.X <= endPoint.X && startPoint.Y <= endPoint.Y)
+                            //{
+                            //    startAngle = 270f;
+                            //    startAlfaAngle = 180f;
+                            //    startBetaAngle = 90f - betaAngle;
+                            //}
+                            //else if (startPoint.X > endPoint.X && startPoint.Y <= endPoint.Y)
+                            //{
+                            //    startAngle = 180f;
+                            //    startAlfaAngle = 360f - alfaAngle;
+                            //    startBetaAngle = 90f;
+                            //}
+                            //else if (startPoint.X > endPoint.X && startPoint.Y > endPoint.Y)
+                            //{
+                            //    startAngle = 90f;
+                            //    startAlfaAngle = 0f;
+                            //    startBetaAngle = 270f - betaAngle;
+                            //}
+                            //else
+                            //{
+                            //    startAngle = 0f;
+                            //    startAlfaAngle = 180f - alfaAngle;
+                            //    startBetaAngle = 270f;
+                            //}
 
-                            adjustedHeight = Convert.ToInt32(absHeight / 1.5);
-                            adjustetWidth = Convert.ToInt32(absWidth / 1.5);
 
-                            adjustedXforRectangleAngle = adjustetWidth / 4;
-                            adjustedYforRectangleAngle = adjustedHeight / 4;
+                            //adjustedHeight = Convert.ToInt32(absHeight / 1.5);
+                            //adjustetWidth = Convert.ToInt32(absWidth / 1.5);
+
+                            //adjustedXforRectangleAngle = adjustetWidth / 4;
+                            //adjustedYforRectangleAngle = adjustedHeight / 4;
 
                             //just example and not calculating real distance
-                            distanceOne = VectorMagnitude(startPoint, endPoint).ToString();
+                            //distanceOne = TriangleFactoryBase.VectorMagnitude(startPoint, endPoint).ToString();
 
 
 
@@ -238,10 +249,10 @@ namespace WinFormsPaint
                             //    adjustetWidth,
                             //    adjustedHeight);
 
-                            rectangleForRectangleAngle = new Rectangle(minX - (nonAbsWidth / 2) + adjustedXforRectangleAngle,
-                                minY + (nonAbsHeight / 2) + adjustedYforRectangleAngle,
-                                adjustetWidth,
-                                adjustedHeight);
+                            //rectangleForRectangleAngle = new Rectangle(minX - (nonAbsWidth / 2) + adjustedXforRectangleAngle,
+                            //    minY + (nonAbsHeight / 2) + adjustedYforRectangleAngle,
+                            //    adjustetWidth,
+                            //    adjustedHeight);
 
 
                             this.Invalidate();
@@ -249,8 +260,8 @@ namespace WinFormsPaint
                             //points for line here
                             // or just draw below??
                             break;
-                        case Tool.Rectangle:
-                        case Tool.Ellipse:
+                        case ToolTypeEnum.Rectangle:
+                        case ToolTypeEnum.Ellipse:
                             myRectangle = new Rectangle(minX, minY, absWidth, absHeight);
                                 this.Invalidate();
 
@@ -280,31 +291,33 @@ namespace WinFormsPaint
         {
             paint = false;
 
-            switch (tool)
+            switch (toolType)
             {
-                case Tool.Ellipse:
-                    g.DrawEllipse(p, myRectangle);
+                case ToolTypeEnum.Ellipse:
+                    graphics.DrawEllipse(pen, myRectangle);
                     pic.Refresh();
                     break;
-                case Tool.Rectangle:
-                    g.DrawRectangle(p, myRectangle);
+                case ToolTypeEnum.Rectangle:
+                    graphics.DrawRectangle(pen, myRectangle);
                     pic.Refresh();
                     break;
-                case Tool.Line:
-                    g.DrawLine(p, startPoint, endPoint);
-                    g.DrawString(distanceOne, arialFont, brush, halfWayPoint);
+                case ToolTypeEnum.Line:
+                    graphics.DrawLine(pen, startPoint, endPoint);
+                    graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);
                     break;
-                case Tool.Triangle:
-                    g.DrawLine(p, startPoint, endPoint);
-                    g.DrawString(distanceOne, arialFont, brush, halfWayPoint);
-                    g.DrawLine(p, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                    g.DrawLine(p, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
+                case ToolTypeEnum.Triangle:
+                    //graphics.DrawLine(pen, startPoint, endPoint);
+                    //graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);
+                    //graphics.DrawLine(pen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
+                    //graphics.DrawLine(pen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
 
-                    g.DrawArc(p, rectangleForRectangleAngle, startAngle, 90.0f);
+                    //graphics.DrawArc(pen, rectangleForRectangleAngle, startAngle, 90.0f);
 
-                    g.DrawArc(p, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
+                    //graphics.DrawArc(pen, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
 
-                    g.DrawArc(p, rectangleForBetaAngle, startBetaAngle, betaAngle);
+                    //graphics.DrawArc(pen, rectangleForBetaAngle, startBetaAngle, betaAngle);
+
+                    triangleObject.DrawTriangle(graphics);
 
                     break;
             }
@@ -322,78 +335,80 @@ namespace WinFormsPaint
         //draws objects while mouse is moving and left button is down
         protected void OnPaint(object sender, PaintEventArgs e)
         {
+           
+
             //switch
             //ellipse and so on
             // e.Graphics.DrawRectangle(p, myRectangle);
 
-            switch (tool)
+            switch (toolType)
             {
-                case Tool.Line:
-                    e.Graphics.DrawLine(p, startPoint, endPoint);
+                case ToolTypeEnum.Line:
+                    e.Graphics.DrawLine(pen, startPoint, endPoint);
                     e.Graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);
                     break;
-                case Tool.Rectangle:
-                    e.Graphics.DrawRectangle(p, myRectangle);
+                case ToolTypeEnum.Rectangle:
+                    e.Graphics.DrawRectangle(pen, myRectangle);
                     break;
-                case Tool.Ellipse:
-                    e.Graphics.DrawEllipse(p, myRectangle);
+                case ToolTypeEnum.Ellipse:
+                    e.Graphics.DrawEllipse(pen, myRectangle);
                     break;
-                case Tool.Triangle:
-                    e.Graphics.DrawLine(p, startPoint, endPoint);
-                    e.Graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);
-                    e.Graphics.DrawLine(p, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
-                    e.Graphics.DrawLine(p, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
+                case ToolTypeEnum.Triangle:
+                    //e.Graphics.DrawLine(pen, startPoint, endPoint);
+                    //e.Graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);
+                    //e.Graphics.DrawLine(pen, startPoint.X, startPoint.Y, startPoint.X, endPoint.Y);
+                    //e.Graphics.DrawLine(pen, startPoint.X, endPoint.Y, endPoint.X, endPoint.Y);
 
-
+                    triangleObject.DrawTriangle2(e.Graphics);
                    
-                    if(rectangleForRectangleAngle.Width > 1 && rectangleForRectangleAngle.Height > 1)
-                    {
-                        //e.Graphics.DrawRectangle(p, myRectangle);
-                        e.Graphics.DrawArc(p, rectangleForRectangleAngle, startAngle, 90.0f);
-                        //e.Graphics.DrawRectangle(p, rectangleForRectangleAngle);
+                    //if(rectangleForRectangleAngle.Width > 1 && rectangleForRectangleAngle.Height > 1)
+                    //{
+                    //    //e.Graphics.DrawRectangle(p, myRectangle);
+                    //    e.Graphics.DrawArc(pen, rectangleForRectangleAngle, startAngle, 90.0f);
+                    //    //e.Graphics.DrawRectangle(p, rectangleForRectangleAngle);
 
-                        //e.Graphics.DrawRectangle(p, rectangleForAlfaAngle);
-                        e.Graphics.DrawArc(p, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
+                    //    //e.Graphics.DrawRectangle(p, rectangleForAlfaAngle);
+                    //    e.Graphics.DrawArc(pen, rectangleForAlfaAngle, startAlfaAngle, alfaAngle);
 
-                        //e.Graphics.DrawRectangle(p, rectangleForBetaAngle);
-                        e.Graphics.DrawArc(p, rectangleForBetaAngle, startBetaAngle, betaAngle);
-                        //thirdLine to implement //trigonometie?//
-                    }
+                    //    //e.Graphics.DrawRectangle(p, rectangleForBetaAngle);
+                    //    e.Graphics.DrawArc(pen, rectangleForBetaAngle, startBetaAngle, betaAngle);
+                    //    //thirdLine to implement //trigonometie?//
+                    //}
                     break;
             }
         }
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.White);
-            pic.Image = bm;
-            tool = Tool.NoTool;
+            graphics.Clear(Color.White);
+            pic.Image = bitmap;
+            toolType = ToolTypeEnum.NoTool;
         }
 
         private void btn_triangle_Click(object sender, EventArgs e)
         {
-            tool = Tool.Triangle;
+            toolType = ToolTypeEnum.Triangle;
         }
         private void btn_line_Click(object sender, EventArgs e)
         {
-            tool = Tool.Line;
+            toolType = ToolTypeEnum.Line;
         }
 
         private void btn_rect_Click(object sender, EventArgs e)
         {
-            tool = Tool.Rectangle;
+            toolType = ToolTypeEnum.Rectangle;
         }
         private void btn_ellipse_Click(object sender, EventArgs e)
         {
-            tool = Tool.Ellipse;
+            toolType = ToolTypeEnum.Ellipse;
         }
         private void btn_eraser_Click(object sender, EventArgs e)
         {
-            tool = Tool.Eraser;
+            toolType = ToolTypeEnum.Eraser;
         }
 
         private void btn_pencil_Click(object sender, EventArgs e)
         {
-            tool = Tool.Pencil;
+            toolType = ToolTypeEnum.Pencil;
         }
     }
 }
