@@ -120,7 +120,7 @@ namespace WinFormsPaint
                     break;
             }
 
-            shapeObject = ShapeBase.InitialiseShape(toolType);
+            shapeObject = ShapeBase.InitialiseShape(graphics, toolType);
                 
             
         }
@@ -162,9 +162,10 @@ namespace WinFormsPaint
                     switch (toolType)
                     {
                         case ShapeBase.ToolTypeEnum.Pencil:
-                            px = e.Location;
-                            graphics.DrawLine(pen, px, py);
-                            py = px;
+                            //px = e.Location;
+                            //graphics.DrawLine(pen, px, py);
+                            //graphics.DrawLine(pen, startPoint, endPoint);
+                            //py = px;
                             break;
                         case ShapeBase.ToolTypeEnum.Eraser:
                             px = e.Location;
@@ -176,7 +177,7 @@ namespace WinFormsPaint
                         case ShapeBase.ToolTypeEnum.Rectangle:
                         case ShapeBase.ToolTypeEnum.Triangle:
                         case ShapeBase.ToolTypeEnum.Ellipse:
-                            shapeObject.CalculateForShape();
+                            shapeObject?.CalculateForShape();
 
                             break;
                     }
@@ -215,6 +216,13 @@ namespace WinFormsPaint
         {
             switch (toolType)
             {
+                case ShapeBase.ToolTypeEnum.Pencil:
+                    px = endPoint;
+                    //graphics.DrawLine(pen, px, py);
+                    //graphics.DrawLine(pen, startPoint, endPoint);
+                    graphics.DrawLine(pen, px, py); //graphics instead of e.Graphics???
+                    py = px;
+                    break;
                 case ShapeBase.ToolTypeEnum.Line:
                     e.Graphics.DrawLine(pen, startPoint, endPoint);
                     e.Graphics.DrawString(distanceOne, arialFont, brush, halfWayPoint);

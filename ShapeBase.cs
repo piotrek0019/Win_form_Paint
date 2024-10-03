@@ -134,10 +134,11 @@
         /// <summary>
         /// Initialises different shape objects
         /// </summary>
+        /// <param name="graphics">Graphics used to paint</param>
         /// <param name="toolType">Tool type</param>
         /// <returns>New shape object</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static ShapeBase InitialiseShape(ToolTypeEnum toolType)
+        public static ShapeBase InitialiseShape(Graphics graphics, ToolTypeEnum toolType)
         {
             switch (toolType)
             {
@@ -145,9 +146,19 @@
                     return new RectangleShape();
                 case ToolTypeEnum.Triangle:
                     return new TriangleShape();
+                case ToolTypeEnum.Pencil:
+                    return new LineShape(graphics, ShapeHelpers.GetPen());
+                case ToolTypeEnum.Eraser:
+                    return new LineShape(graphics, ShapeHelpers.GetEraser());
                 default:
                     return null;
             }
         }
+
+        //public void TestPencil(Graphics grapthics)
+        //{
+        //    StartPoint = EndPoint;
+        //    grapthics.DrawLine(pen, StartPoint)
+        //}
     }
 }
