@@ -31,16 +31,16 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox_debug_4 = new System.Windows.Forms.TextBox();
             this.textBox_debug_3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_debug_4 = new System.Windows.Forms.Label();
+            this.lbl_debug_3 = new System.Windows.Forms.Label();
             this.textBox_debug_2 = new System.Windows.Forms.TextBox();
             this.textBox_debug_1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.debug_1 = new System.Windows.Forms.Label();
+            this.lbl_debug_2 = new System.Windows.Forms.Label();
+            this.lbl_debug_1 = new System.Windows.Forms.Label();
             this.textBox_height = new System.Windows.Forms.TextBox();
             this.textBox_width = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_height = new System.Windows.Forms.Label();
+            this.lbl_width = new System.Windows.Forms.Label();
             this.textBox_y = new System.Windows.Forms.TextBox();
             this.textBox_x = new System.Windows.Forms.TextBox();
             this.lbl_y = new System.Windows.Forms.Label();
@@ -70,16 +70,16 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel1.Controls.Add(this.textBox_debug_4);
             this.panel1.Controls.Add(this.textBox_debug_3);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.lbl_debug_4);
+            this.panel1.Controls.Add(this.lbl_debug_3);
             this.panel1.Controls.Add(this.textBox_debug_2);
             this.panel1.Controls.Add(this.textBox_debug_1);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.debug_1);
+            this.panel1.Controls.Add(this.lbl_debug_2);
+            this.panel1.Controls.Add(this.lbl_debug_1);
             this.panel1.Controls.Add(this.textBox_height);
             this.panel1.Controls.Add(this.textBox_width);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lbl_height);
+            this.panel1.Controls.Add(this.lbl_width);
             this.panel1.Controls.Add(this.textBox_y);
             this.panel1.Controls.Add(this.textBox_x);
             this.panel1.Controls.Add(this.lbl_y);
@@ -105,6 +105,7 @@
             this.textBox_debug_4.Name = "textBox_debug_4";
             this.textBox_debug_4.Size = new System.Drawing.Size(187, 23);
             this.textBox_debug_4.TabIndex = 25;
+            this.textBox_debug_4.Visible = false;
             // 
             // textBox_debug_3
             // 
@@ -112,24 +113,27 @@
             this.textBox_debug_3.Name = "textBox_debug_3";
             this.textBox_debug_3.Size = new System.Drawing.Size(187, 23);
             this.textBox_debug_3.TabIndex = 24;
+            this.textBox_debug_3.Visible = false;
             // 
-            // label3
+            // lbl_debug_4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1274, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 15);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Debug_4";
+            this.lbl_debug_4.AutoSize = true;
+            this.lbl_debug_4.Location = new System.Drawing.Point(1274, 112);
+            this.lbl_debug_4.Name = "lbl_debug_4";
+            this.lbl_debug_4.Size = new System.Drawing.Size(53, 15);
+            this.lbl_debug_4.TabIndex = 23;
+            this.lbl_debug_4.Text = "Debug_4";
+            this.lbl_debug_4.Visible = false;
             // 
-            // label6
+            // lbl_debug_3
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1274, 81);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 15);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Debug_3";
+            this.lbl_debug_3.AutoSize = true;
+            this.lbl_debug_3.Location = new System.Drawing.Point(1274, 81);
+            this.lbl_debug_3.Name = "lbl_debug_3";
+            this.lbl_debug_3.Size = new System.Drawing.Size(53, 15);
+            this.lbl_debug_3.TabIndex = 22;
+            this.lbl_debug_3.Text = "Debug_3";
+            this.lbl_debug_3.Visible = false;
             // 
             // textBox_debug_2
             // 
@@ -137,6 +141,7 @@
             this.textBox_debug_2.Name = "textBox_debug_2";
             this.textBox_debug_2.Size = new System.Drawing.Size(187, 23);
             this.textBox_debug_2.TabIndex = 21;
+            this.textBox_debug_2.Visible = false;
             // 
             // textBox_debug_1
             // 
@@ -144,24 +149,27 @@
             this.textBox_debug_1.Name = "textBox_debug_1";
             this.textBox_debug_1.Size = new System.Drawing.Size(187, 23);
             this.textBox_debug_1.TabIndex = 20;
+            this.textBox_debug_1.Visible = false;
             // 
-            // label5
+            // lbl_debug_2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1274, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 15);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Debug_2";
+            this.lbl_debug_2.AutoSize = true;
+            this.lbl_debug_2.Location = new System.Drawing.Point(1274, 54);
+            this.lbl_debug_2.Name = "lbl_debug_2";
+            this.lbl_debug_2.Size = new System.Drawing.Size(53, 15);
+            this.lbl_debug_2.TabIndex = 19;
+            this.lbl_debug_2.Text = "Debug_2";
+            this.lbl_debug_2.Visible = false;
             // 
-            // debug_1
+            // lbl_debug_1
             // 
-            this.debug_1.AutoSize = true;
-            this.debug_1.Location = new System.Drawing.Point(1274, 28);
-            this.debug_1.Name = "debug_1";
-            this.debug_1.Size = new System.Drawing.Size(53, 15);
-            this.debug_1.TabIndex = 18;
-            this.debug_1.Text = "Debug_1";
+            this.lbl_debug_1.AutoSize = true;
+            this.lbl_debug_1.Location = new System.Drawing.Point(1274, 28);
+            this.lbl_debug_1.Name = "lbl_debug_1";
+            this.lbl_debug_1.Size = new System.Drawing.Size(53, 15);
+            this.lbl_debug_1.TabIndex = 18;
+            this.lbl_debug_1.Text = "Debug_1";
+            this.lbl_debug_1.Visible = false;
             // 
             // textBox_height
             // 
@@ -177,23 +185,23 @@
             this.textBox_width.Size = new System.Drawing.Size(100, 23);
             this.textBox_width.TabIndex = 16;
             // 
-            // label1
+            // lbl_height
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1121, 112);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 15);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "H";
+            this.lbl_height.AutoSize = true;
+            this.lbl_height.Location = new System.Drawing.Point(1121, 112);
+            this.lbl_height.Name = "lbl_height";
+            this.lbl_height.Size = new System.Drawing.Size(16, 15);
+            this.lbl_height.TabIndex = 15;
+            this.lbl_height.Text = "H";
             // 
-            // label2
+            // lbl_width
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1121, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "W";
+            this.lbl_width.AutoSize = true;
+            this.lbl_width.Location = new System.Drawing.Point(1121, 81);
+            this.lbl_width.Name = "lbl_width";
+            this.lbl_width.Size = new System.Drawing.Size(18, 15);
+            this.lbl_width.TabIndex = 14;
+            this.lbl_width.Text = "W";
             // 
             // textBox_y
             // 
@@ -301,6 +309,7 @@
             // 
             // btn_fill
             // 
+            this.btn_fill.Enabled = false;
             this.btn_fill.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btn_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_fill.ForeColor = System.Drawing.Color.White;
@@ -313,10 +322,10 @@
             this.btn_fill.Text = "Fill";
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = true;
-            this.btn_fill.Enabled = false;
             // 
             // btn_color
             // 
+            this.btn_color.Enabled = false;
             this.btn_color.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.btn_color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_color.ForeColor = System.Drawing.Color.White;
@@ -329,7 +338,6 @@
             this.btn_color.Text = "Color";
             this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_color.UseVisualStyleBackColor = true;
-            this.btn_color.Enabled = false;
             // 
             // pic_color
             // 
@@ -415,7 +423,6 @@
             this.pic.Size = new System.Drawing.Size(1553, 614);
             this.pic.TabIndex = 2;
             this.pic.TabStop = false;
-            this.pic.Click += new System.EventHandler(this.pic_Click);
             this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
@@ -465,15 +472,15 @@
         private Button btn_clear;
         private TextBox textBox_height;
         private TextBox textBox_width;
-        private Label label1;
-        private Label label2;
+        private Label lbl_height;
+        private Label lbl_width;
         private TextBox textBox_debug_4;
         private TextBox textBox_debug_3;
-        private Label label3;
-        private Label label6;
+        private Label lbl_debug_4;
+        private Label lbl_debug_3;
         private TextBox textBox_debug_2;
         private TextBox textBox_debug_1;
-        private Label label5;
-        private Label debug_1;
+        private Label lbl_debug_2;
+        private Label lbl_debug_1;
     }
 }
