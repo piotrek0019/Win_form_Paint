@@ -13,14 +13,14 @@ namespace WinFormsPaint
         /// <summary>
         /// Rectanlge shape to be drawn
         /// </summary>
-        private Rectangle rectangle;
+        protected Rectangle Rectangle { get; private set; }
 
         /// <summary>
         /// Calculates all, necessary for the shape values
         /// </summary>ry>
         public override void CalculateForShape()
         {
-            rectangle = new Rectangle(MinX, MinY, AbsWidth, AbsHeight);
+            Rectangle = new Rectangle(MinX, MinY, AbsWidth, AbsHeight);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace WinFormsPaint
         /// <param name="graphics"></param>
         public override void DrawShape(Graphics graphics)
         {
-            graphics.DrawRectangle(Pen, rectangle);
+            graphics.DrawRectangle(Pen, Rectangle);
         }
     }
 }

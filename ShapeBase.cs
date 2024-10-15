@@ -45,12 +45,12 @@
         /// <summary>
         /// The absolute width
         /// </summary>
-        protected int AbsWidth { get; set; }
+        public int AbsWidth { get; set; }
 
         /// <summary>
         /// The absolute height
         /// </summary>
-        protected int AbsHeight { get; set; }
+        public int AbsHeight { get; set; }
 
         /// <summary>
         /// The non-absolute width
@@ -123,7 +123,10 @@
         /// <summary>
         /// Calculates all, necessary for the shape values
         /// </summary>
-        public abstract void CalculateForShape();
+        public virtual void CalculateForShape()
+        {
+            DistanceOne = GetVectorMagnitude(StartPoint, EndPoint).ToString();
+        }
 
         /// <summary>
         /// Draw shape based on calculated values
@@ -144,21 +147,33 @@
             {
                 case ToolTypeEnum.Rectangle:
                     return new RectangleShape();
+                case ToolTypeEnum.Ellipse:
+                    return new EllipseShape();
                 case ToolTypeEnum.Triangle:
                     return new TriangleShape();
                 case ToolTypeEnum.Pencil:
                     return new LineShape(graphics, ShapeHelpers.GetPen());
                 case ToolTypeEnum.Eraser:
                     return new LineShape(graphics, ShapeHelpers.GetEraser());
+                case ToolTypeEnum.Line:
+                    return new LineShape(ShapeHelpers.GetPen());
                 default:
                     return null;
             }
         }
 
-        //public void TestPencil(Graphics grapthics)
-        //{
-        //    StartPoint = EndPoint;
-        //    grapthics.DrawLine(pen, StartPoint)
-        //}
+        /// <summary>
+        /// Gets vector projection between two points
+        /// </summary>
+        /// <param name="a">Point a</param>
+        /// <param name="b">Point b</param>
+        /// <returns>Projection</returns>
+        private static int GetVectorMagnitude(Point a, Point b)
+        {
+            double result;
+            result = Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
+
+            return Convert.ToInt32(result);
+        }
     }
 }

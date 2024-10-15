@@ -56,26 +56,13 @@
             return Math.Atan(Convert.ToDouble(MaxX - MinX) / Convert.ToDouble(MaxY - MinY));
         }
 
-
-        /// <summary>
-        /// Gets vector projection between two points
-        /// </summary>
-        /// <param name="a">Point a</param>
-        /// <param name="b">Point b</param>
-        /// <returns>Projection</returns>
-        public static int GetVectorMagnitude(Point a, Point b)
-        {
-            double result;
-            result = Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
-
-            return Convert.ToInt32(result);
-        }
-
         /// <summary>
         /// Calculates all, necessary for the shape values
         /// </summary>
         public override void CalculateForShape()
         {
+            base.CalculateForShape();
+
             if ((MaxY - MinY) > 0 && (MaxX - MinX) > 0)
             {
                 alfaInRadiants = GetCaculatedAlphaInRadiants();
@@ -133,11 +120,6 @@
 
             adjustedXforRectangleAngle = adjustetWidth / 4;
             adjustedYforRectangleAngle = adjustedHeight / 4;
-
-            //just example and not calculating real distance
-            DistanceOne = GetVectorMagnitude(StartPoint, EndPoint).ToString();
-
-
 
             var rectangleX = Convert.ToInt32(MinX - (NonAbsWidth / 2) + adjustedXforRectangleAngle);
             var rectangeY = Convert.ToInt32(MinY + (NonAbsHeight / 2) + adjustedYforRectangleAngle);
